@@ -12,5 +12,11 @@
   "scripts": {
     "build": "browserify --debug --transform babelify app.jsx --outfile bundle.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "http": "0.0.0",
+    "peer": "^0.2.8",
+    "ws": "^0.8.1"
+  }
 }

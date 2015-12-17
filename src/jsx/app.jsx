@@ -1,7 +1,7 @@
 // React をロード
 var React = require('react');
 // 外部ファイルへ分割した Message クラスをロード
-var Message = require('./message.jsx');
+var Message = require('./components/message.jsx');
 
 // このアプリケーションのメインとなる App クラス
 var App = React.createClass({
