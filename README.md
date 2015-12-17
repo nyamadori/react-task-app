@@ -1,1 +1,4 @@
-Thank [Hiroyuki Kusu](https://github.com/hkusu) for Qiita article [React.js + Babel + Browserify + gulp の環境を作ってみた](http://qiita.com/hkusu/items/e068bba0ae036b447754)
+Implement a multi-party video chat that use Node, Peer.js, React.js and etc.
+
+This project is based on [hkusu/react-babel-browserify-gulp-sample](https://github.com/hkusu/react-babel-browserify-gulp-sample).
+Thank [Hiroyuki Kusu](https://github.com/hkusu) for the base environment!
