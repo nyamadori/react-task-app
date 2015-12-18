@@ -1,35 +1,67 @@
-// React をロード
-var React = require('react');
-// 外部ファイルへ分割した Message クラスをロード
-var Message = require('./components/message.jsx');
+import React from 'react';
+import Task from './components/task.jsx';
 
-// このアプリケーションのメインとなる App クラス
-var App = React.createClass({
-  getInitialState: function() {
-    return {
-      person: {
-        name: 'ヤマダ',
-        age: 34
-      }
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tasks: [],
+      taskId: 0
     };
-  },
-  handleChange: function(event) {
+  }
+
+  onTaskFormSubmit(e) {
+    e.preventDefault();
+    var input = this.refs.taskDescInput;
+    var desc = input.getDOMNode().value;
+    if (!desc || desc === '') return;
+
+    this.setState({taskId: this.state.taskId + 1});
     this.setState({
-      person: {
-        name: event.target.value,
-        age: this.state.person.age
-      }
+      tasks: this.state.tasks.concat({id: this.state.taskId, description: desc})
     });
-  },
-  render: function() {
+
+    input.getDOMNode().value = '';
+  }
+
+  onTaskDelete(id) {
+    this.setState({
+      tasks: this.state.tasks.filter((task) => {
+        return task.id !== id;
+      })
+    });
+  }
+
+  onTaskCompleted(id) {
+    this.setState({
+      tasks: this.state.tasks.map((task) => {
+        if (task.id !== id) return task;
+        task.completed = !task.completed;
+        return task;
+      })
+    });
+  }
+
+  render() {
     return (
       <div>
-        <input type="text" value={this.state.person.name} onChange={this.handleChange} />
-        <Message name={this.state.person.name} age={this.state.person.age} />
+        <ul>
+          {this.state.tasks.map((task) => {
+            return <Task
+              key={task.id}
+              task={task}
+              onDelete={this.onTaskDelete.bind(this)}
+              onCompleted={this.onTaskCompleted.bind(this)}/>;
+          })}
+        </ul>
+
+        <form onSubmit={this.onTaskFormSubmit.bind(this)}>
+          <input ref="taskDescInput" type="text" name="task" />
+        </form>
       </div>
     );
   }
-});
+}
 
 // app クラスを描画
 React.render(
