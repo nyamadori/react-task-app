@@ -1,7 +1,7 @@
-react-peerjs-video-chat
-=======================
+react-task-app
+==============
 
-Implement a multi-party video chat that use Node, Peer.js, React.js and etc.
+Implemented a simple task application by React.
 
 This project is based on [hkusu/react-babel-browserify-gulp-sample](https://github.com/hkusu/react-babel-browserify-gulp-sample).
 Thank [Hiroyuki Kusu](https://github.com/hkusu) for this environment!
