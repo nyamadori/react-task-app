@@ -1,31 +1,63 @@
 // React をロード
 var React = require('react');
 // 外部ファイルへ分割した Message クラスをロード
-var Message = require('./components/message.jsx');
+var Task = require('./components/task.jsx');
 
 // このアプリケーションのメインとなる App クラス
 var App = React.createClass({
   getInitialState: function() {
     return {
-      person: {
-        name: 'ヤマダ',
-        age: 34
-      }
+      tasks: [],
+      taskId: 0
     };
   },
-  handleChange: function(event) {
+
+  onTaskFormSubmit: function(e) {
+    e.preventDefault();
+
+    var desc = this.refs.taskDescInput.getDOMNode().value;
+    if (!desc || desc === '') return;
+
+    this.setState({taskId: this.state.taskId + 1});
     this.setState({
-      person: {
-        name: event.target.value,
-        age: this.state.person.age
-      }
+      tasks: this.state.tasks.concat({key: this.state.taskId, description: desc})
+    });
+
+    this.refs.taskDescInput.getDOMNode().value = '';
+  },
+
+  onTaskDelete: function (key) {
+    this.setState({
+      tasks: this.state.tasks.filter((task) => {
+        return task.key !== key;
+      })
     });
   },
+
+  onTaskCompleted: function (key) {
+    this.setState({
+      tasks: this.state.tasks.map((task) => {
+        if (task.key !== key) return task;
+        task.completed = !task.completed;
+        return task;
+      })
+    });
+  },
+
   render: function() {
     return (
       <div>
-        <input type="text" value={this.state.person.name} onChange={this.handleChange} />
-        <Message name={this.state.person.name} age={this.state.person.age} />
+        <ul>
+          {this.state.tasks.map((task) => {
+            return <Task task={task}
+              onDelete={this.onTaskDelete}
+              onCompleted={this.onTaskCompleted}/>;
+          })}
+        </ul>
+
+        <form onSubmit={this.onTaskFormSubmit}>
+          <input ref="taskDescInput" type="text" name="task" />
+        </form>
       </div>
     );
   }
