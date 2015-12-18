@@ -1,12 +1,16 @@
 import React from 'react';
 import Task from './components/task.jsx';
+import './styles/index';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [],
-      taskId: 0
+      tasks: [
+        {id: 1, description: 'Buy an apple', completed: true},
+        {id: 2, description: 'Buy a fish'}
+      ],
+      taskId: 3
     };
   }
 
@@ -45,7 +49,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <ul>
+        <div className="tasks">
           {this.state.tasks.map((task) => {
             return <Task
               key={task.id}
@@ -53,10 +57,13 @@ class App extends React.Component {
               onDelete={this.onTaskDelete.bind(this)}
               onCompleted={this.onTaskCompleted.bind(this)}/>;
           })}
-        </ul>
+        </div>
 
-        <form onSubmit={this.onTaskFormSubmit.bind(this)}>
-          <input ref="taskDescInput" type="text" name="task" />
+        <form className="tasks-form" onSubmit={this.onTaskFormSubmit.bind(this)}>
+          <div className="input-group">
+            <i className="icon icon-plus"></i>
+            <input id="tasks-description" className="tasks-form-description" ref="taskDescInput" type="text" name="task" autoComplete="off" />
+          </div>
         </form>
       </div>
     );

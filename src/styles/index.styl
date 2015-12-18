@@ -1,0 +1,87 @@
+base-line-height = 1.3
+base-font-size = 16px
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-size: base-font-size
+  line-height: base-line-height
+}
+
+.tasks
+  margin: 0;
+  list-style-type: none
+
+.tasks-item
+  &:after
+    display: block
+    content: ''
+    clear: both
+
+  &.completed
+    > .tasks-item-description
+      text-decoration: line-through
+      color: #ddd
+
+.tasks-item-description
+  padding: 8px 16px
+  padding-left: 0
+  float: left
+
+.tasks-item-nav
+  float: right
+
+  > a
+    display: inline-block
+    padding: 8px 16px 8px 8px
+    text-decoration: none
+
+.checkbox
+  display: inline-block
+  padding: 4px
+  line-height: 1
+  color: #333
+
+  > .checkbox-border
+    display: block
+    position: relative
+    font-size: 16px;
+    border: 1px solid #ddd
+    border-radius: 2px
+    width: 14px
+    height: 14px
+
+    > .icon-check
+      position: absolute
+      top: -3px
+      left: 1px
+      color: green
+
+.input-group
+  position: relative
+
+  .icon
+    position: absolute
+    left: 12px
+    top: 50%
+    margin-top: -8px
+    color: #ddd
+
+.tasks-item-check
+  float: left
+  padding: 10px
+
+.tasks-item-remove
+  color: #ccc
+
+  &:hover
+    color: #aaa
+
+.tasks-form-description
+  display: block
+  padding: 8px 36px
+  width: 100%
+  border: none
+  border-bottom: 1px solid #ddd
+  font-size: base-font-size
+  outline: none

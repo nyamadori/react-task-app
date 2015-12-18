@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 export default class Task extends React.Component {
   constructor(props) {
@@ -16,22 +17,29 @@ export default class Task extends React.Component {
   }
 
   render() {
-    if (this.props.task.completed) {
-      return (
-        <li>
-          <s>{this.props.task.description}</s>
-          <a href="#" onClick={this.onRemoveBtnClick.bind(this)}>削除</a>
-          <a href="#" onClick={this.onCompleteBtnClick.bind(this)}>未完了</a>
-        </li>
-      );
-    } else {
-      return (
-        <li>
-          {this.props.task.description}
-          <a href="#" onClick={this.onRemoveBtnClick.bind(this)}>削除</a>
-          <a href="#" onClick={this.onCompleteBtnClick.bind(this)}>完了</a>
-        </li>
-      );
-    }
+    var task = this.props.task;
+    var liClass = classNames({
+      'tasks-item': true,
+      'completed': task.completed
+    });
+
+    return (
+      <div className={liClass}>
+        <a href="#" className="checkbox tasks-item-check" onClick={this.onCompleteBtnClick.bind(this)}>
+          <span className="checkbox-border">
+            <i className="icon icon-check" style={!task.completed ? {display: 'none'} : {}}></i>
+          </span>
+        </a>
+        <div className="tasks-item-description">
+          {task.description}
+        </div>
+
+        <div className="tasks-item-nav">
+          <a className="tasks-item-remove" href="#" onClick={this.onRemoveBtnClick.bind(this)}>
+            <i className="icon icon-times"></i>
+          </a>
+        </div>
+      </div>
+    );
   }
 }
