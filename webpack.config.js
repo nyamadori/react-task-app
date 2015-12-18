@@ -9,7 +9,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.styl']
   },
   module: {
     loaders: [
@@ -23,7 +23,8 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        loader: 'stylus'
+        loader: 'style-loader!css-loader!stylus-loader!',
+        exclude: /(node_modules)/
       }
     ]
   }
