@@ -1,67 +1,67 @@
-// React をロード
-var React = require('react');
-// 外部ファイルへ分割した Message クラスをロード
-var Task = require('./components/task.jsx');
+import React from 'react';
+import Task from './components/task.jsx';
 
-// このアプリケーションのメインとなる App クラス
-var App = React.createClass({
-  getInitialState: function() {
-    return {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       tasks: [],
       taskId: 0
     };
-  },
+  }
 
-  onTaskFormSubmit: function(e) {
+  onTaskFormSubmit(e) {
     e.preventDefault();
-
-    var desc = this.refs.taskDescInput.getDOMNode().value;
+    var input = this.refs.taskDescInput;
+    var desc = input.getDOMNode().value;
     if (!desc || desc === '') return;
 
     this.setState({taskId: this.state.taskId + 1});
     this.setState({
-      tasks: this.state.tasks.concat({key: this.state.taskId, description: desc})
+      tasks: this.state.tasks.concat({id: this.state.taskId, description: desc})
     });
 
-    this.refs.taskDescInput.getDOMNode().value = '';
-  },
+    input.getDOMNode().value = '';
+  }
 
-  onTaskDelete: function (key) {
+  onTaskDelete(id) {
     this.setState({
       tasks: this.state.tasks.filter((task) => {
-        return task.key !== key;
+        return task.id !== id;
       })
     });
-  },
+  }
 
-  onTaskCompleted: function (key) {
+  onTaskCompleted(id) {
     this.setState({
       tasks: this.state.tasks.map((task) => {
-        if (task.key !== key) return task;
+        if (task.id !== id) return task;
         task.completed = !task.completed;
         return task;
       })
     });
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div>
         <ul>
           {this.state.tasks.map((task) => {
-            return <Task task={task}
-              onDelete={this.onTaskDelete}
-              onCompleted={this.onTaskCompleted}/>;
+            return <Task
+              key={task.id}
+              task={task}
+              onDelete={this.onTaskDelete.bind(this)}
+              onCompleted={this.onTaskCompleted.bind(this)}/>;
           })}
         </ul>
 
-        <form onSubmit={this.onTaskFormSubmit}>
+        <form onSubmit={this.onTaskFormSubmit.bind(this)}>
           <input ref="taskDescInput" type="text" name="task" />
         </form>
       </div>
     );
   }
-});
+}
 
 // app クラスを描画
 React.render(

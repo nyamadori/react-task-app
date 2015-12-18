@@ -1,36 +1,37 @@
-var React = require('react');
+import React from 'react';
 
-var Task = React.createClass({
-  onRemoveBtnClick: function (e) {
+export default class Task extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  onRemoveBtnClick(e) {
     e.preventDefault();
-    this.props.onDelete(this.props.task.key);
-  },
+    this.props.onDelete(this.props.task.id);
+  }
 
-  onCompleteBtnClick: function (e) {
+  onCompleteBtnClick(e) {
     e.preventDefault();
-    this.props.onCompleted(this.props.task.key);
-  },
+    this.props.onCompleted(this.props.task.id);
+  }
 
-  render: function() {
+  render() {
     if (this.props.task.completed) {
       return (
         <li>
           <s>{this.props.task.description}</s>
-          <a href="#" onClick={this.onRemoveBtnClick}>削除</a>
-          <a href="#" onClick={this.onCompleteBtnClick}>未完了</a>
+          <a href="#" onClick={this.onRemoveBtnClick.bind(this)}>削除</a>
+          <a href="#" onClick={this.onCompleteBtnClick.bind(this)}>未完了</a>
         </li>
       );
     } else {
       return (
         <li>
           {this.props.task.description}
-          <a href="#" onClick={this.onRemoveBtnClick}>削除</a>
-          <a href="#" onClick={this.onCompleteBtnClick}>完了</a>
+          <a href="#" onClick={this.onRemoveBtnClick.bind(this)}>削除</a>
+          <a href="#" onClick={this.onCompleteBtnClick.bind(this)}>完了</a>
         </li>
       );
     }
   }
-});
-
-// エクスポート
-module.exports = Task;
+}
