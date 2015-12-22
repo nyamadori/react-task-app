@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import Task from './components/task.jsx';
 import './styles/index';
 
@@ -7,8 +8,17 @@ class App extends React.Component {
     super(props);
     this.state = {
       tasks: [
-        {id: 1, description: 'Buy an apple', completed: true},
-        {id: 2, description: 'Buy a fish'}
+        {
+          id: 1,
+          description: 'Buy an apple',
+          completed: true,
+          remindTime: moment().add(1, 'days')
+        },
+        {
+          id: 2,
+          description: 'Buy a fish',
+          remindTime: moment().add(2, 'days')
+        }
       ],
       taskId: 3
     };
@@ -46,6 +56,10 @@ class App extends React.Component {
     });
   }
 
+  onSetRemindTime(id) {
+
+  }
+
   render() {
     return (
       <div>
@@ -55,14 +69,18 @@ class App extends React.Component {
               key={task.id}
               task={task}
               onDelete={this.onTaskDelete.bind(this)}
-              onCompleted={this.onTaskCompleted.bind(this)}/>;
+              onCompleted={this.onTaskCompleted.bind(this)}
+              onSetRemindTime={this.onSetRemindTime.bind(this)} />;
           })}
         </div>
 
         <form className="tasks-form" onSubmit={this.onTaskFormSubmit.bind(this)}>
           <div className="input-group">
             <i className="icon icon-plus"></i>
-            <input id="tasks-description" className="tasks-form-description" ref="taskDescInput" type="text" name="task" autoComplete="off" />
+            <input id="tasks-description"
+                   className="tasks-form-description"
+                   ref="taskDescInput"
+                   type="text" name="task" autoComplete="off" />
           </div>
         </form>
       </div>

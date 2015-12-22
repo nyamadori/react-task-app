@@ -35,6 +35,10 @@ body {
     display: inline-block
     padding: 8px 16px 8px 8px
     text-decoration: none
+    color: #ccc
+
+    &:hover
+      color: #aaa
 
 .checkbox
   display: inline-block
@@ -71,12 +75,6 @@ body {
   float: left
   padding: 10px
 
-.tasks-item-remove
-  color: #ccc
-
-  &:hover
-    color: #aaa
-
 .tasks-form-description
   display: block
   padding: 8px 36px
@@ -85,3 +83,45 @@ body {
   border-bottom: 1px solid #ddd
   font-size: base-font-size
   outline: none
+
+.rc-calendar
+  display: block;
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 4px 8px;
+  border-radius: 6px;
+
+.date-time-input
+  font-size: 12px
+  color: #000
+
+  input
+    border-style: none
+    outline: none
+    text-align: center
+    padding: 0
+    font-size: 12px
+    border-radius: 4px
+
+    &:focus
+      background-color: #58B2DC
+
+    &::-webkit-inner-spin-button
+    &::-webkit-outer-spin-button
+      -webkit-appearance: none
+      margin: 0
+
+  .input-years
+    width: 30px
+
+  .input-months
+  .input-days
+  .input-hours
+  .input-minutes
+    width: 18px
+    text-align: center
+
+  .time
+    margin-left: 8px
