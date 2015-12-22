@@ -42,7 +42,7 @@ export default class Task extends React.Component {
           </span>
         </a>
         <div className="tasks-item-description">
-          {task.description} {task.remindTime.calendar()}
+          {task.description}
         </div>
 
         <div className="tasks-item-nav">
