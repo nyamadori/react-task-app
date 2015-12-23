@@ -21,9 +21,6 @@ export default class Task extends React.Component {
   onSetRemindTimeClick(e) {
     e.preventDefault();
     this.props.onSetRemindTime(this.props.task.id);
-
-    var calendar = this.refs.calendar.getDOMNode();
-    calendar.style.display = 'block';
   }
 
   render() {

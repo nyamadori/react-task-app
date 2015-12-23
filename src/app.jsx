@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import moment from 'moment';
 import Task from './components/task.jsx';
 import './styles/index';
@@ -89,7 +90,7 @@ class App extends React.Component {
 }
 
 // app クラスを描画
-React.render(
+ReactDOM.render(
   <App />,
   document.getElementById('container')
 );
